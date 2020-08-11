@@ -44,6 +44,7 @@ const Editable: React.FC<EditableProps> = ({
         defaultValue={currentValue}
         onKeyPress={checkEnter}
         onChange={updateValue}
+        onBlur={finishEdit}
       />
     );
   };

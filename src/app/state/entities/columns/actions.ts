@@ -41,3 +41,18 @@ export function detachFromColumn(columnId, taskId) {
     taskId
   };
 }
+
+export function updateTaskOrder(
+  columnId,
+  taskId,
+  destinationIndex,
+  sourceIndex
+) {
+  return {
+    type: types.UPDATE_TASK_ORDER,
+    columnId,
+    taskId,
+    destinationIndex,
+    sourceIndex
+  };
+}

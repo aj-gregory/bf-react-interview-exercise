@@ -15,20 +15,28 @@ const Columns: React.FC<ColumnsProps> = ({ columns, dispatch }) => {
       return;
     }
     if (result.destination.droppableId === result.source.droppableId) {
-      return;
+      dispatch(
+        columnActions.updateTaskOrder(
+          result.destination.droppableId,
+          result.draggableId,
+          result.destination.index,
+          result.source.index
+        )
+      );
+    } else {
+      dispatch(
+        columnActions.attachToColumn(
+          result.destination.droppableId,
+          result.draggableId
+        )
+      );
+      dispatch(
+        columnActions.detachFromColumn(
+          result.source.droppableId,
+          result.draggableId
+        )
+      );
     }
-    dispatch(
-      columnActions.attachToColumn(
-        result.destination.droppableId,
-        result.draggableId
-      )
-    );
-    dispatch(
-      columnActions.detachFromColumn(
-        result.source.droppableId,
-        result.draggableId
-      )
-    );
   };
 
   return (

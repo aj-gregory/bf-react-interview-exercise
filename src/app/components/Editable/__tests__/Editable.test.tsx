@@ -114,4 +114,29 @@ describe("editable component", () => {
 
     expect(mockEdit).toHaveBeenCalledWith("a different value");
   });
+
+  it("finishes edit when focus is lost", async () => {
+    const mockEdit = jest.fn();
+
+    act(() => {
+      container = render(
+        <Editable
+          value="a new val"
+          onEdit={mockEdit}
+          onDelete={jest.fn()}
+          onValueClick={jest.fn()}
+          editing={true}
+        />
+      );
+    });
+
+    await act(async () => {
+      await fireEvent.change(container.getByTestId("task-name-input"), {
+        target: { value: "a different value" }
+      });
+      await fireEvent.blur(container.getByTestId("task-name-input"), {});
+    });
+
+    expect(mockEdit).toHaveBeenCalledWith("a different value");
+  });
 });
